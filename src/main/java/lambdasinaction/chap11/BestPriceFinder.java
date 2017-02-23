@@ -52,6 +52,9 @@ public class BestPriceFinder {
     }
 
     public Stream<CompletableFuture<String>> findPricesStream(String product) {
+
+        System.out.println("xxxxxxxxxxxx");
+
         return shops.stream()
                 .map(shop -> CompletableFuture.supplyAsync(() -> shop.getPrice(product), executor))
                 .map(future -> future.thenApply(Quote::parse))
