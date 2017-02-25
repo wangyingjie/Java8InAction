@@ -22,7 +22,7 @@ public class ExecuteAround {
 
     public static String processFileLimited() throws IOException {
         try (BufferedReader br =
-                     new BufferedReader(new FileReader("lambdasinaction/chap3/data.txt"))) {
+                     new BufferedReader(new FileReader("lambdasinaction/chap3/udata.txt"))) {
             return br.readLine();
         }
 
@@ -36,8 +36,10 @@ public class ExecuteAround {
 
     }
 
+    @FunctionalInterface //标注该接口为函数式接口  是一种好的实践
     public interface BufferedReaderProcessor {
         public String process(BufferedReader b) throws IOException;
 
+        //void String sayHello();
     }
 }

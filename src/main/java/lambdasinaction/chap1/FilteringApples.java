@@ -67,6 +67,7 @@ public class FilteringApples{
             if(p.test(apple)){
                 result.add(apple);
             }
+
         }
         return result;
     }       
