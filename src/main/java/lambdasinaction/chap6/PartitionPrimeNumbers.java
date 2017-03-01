@@ -2,14 +2,16 @@ package lambdasinaction.chap6;
 
 import java.util.*;
 import java.util.function.*;
-import java.util.stream.*;
+import java.util.stream.Collector;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
-import static java.util.stream.Collector.Characteristics.*;
+import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
+import static java.util.stream.Collectors.partitioningBy;
 
 public class PartitionPrimeNumbers {
 
-    public static void main(String ... args) {
+    public static void main(String... args) {
         System.out.println("Numbers partitioned in prime and non-prime: " + partitionPrimes(100));
         System.out.println("Numbers partitioned in prime and non-prime: " + partitionPrimesWithCustomCollector(100));
 
@@ -21,7 +23,7 @@ public class PartitionPrimeNumbers {
     }
 
     public static boolean isPrime(int candidate) {
-        return IntStream.rangeClosed(2, candidate-1)
+        return IntStream.rangeClosed(2, candidate - 1)
                 .limit((long) Math.floor(Math.sqrt((double) candidate)) - 1)
                 .noneMatch(i -> candidate % i == 0);
     }
@@ -61,8 +63,8 @@ public class PartitionPrimeNumbers {
         @Override
         public BiConsumer<Map<Boolean, List<Integer>>, Integer> accumulator() {
             return (Map<Boolean, List<Integer>> acc, Integer candidate) -> {
-                acc.get( isPrime( acc.get(true),
-                        candidate) )
+                acc.get(isPrime(acc.get(true),
+                        candidate))
                         .add(candidate);
             };
         }
@@ -95,7 +97,7 @@ public class PartitionPrimeNumbers {
                             put(false, new ArrayList<Integer>());
                         }},
                         (acc, candidate) -> {
-                            acc.get( isPrime(acc.get(true), candidate) )
+                            acc.get(isPrime(acc.get(true), candidate))
                                     .add(candidate);
                         },
                         (map1, map2) -> {

@@ -9,17 +9,24 @@ public class ToListCollector<T> implements Collector<T, List<T>, List<T>> {
 
     @Override
     public Supplier<List<T>> supplier() {
-        return () -> new ArrayList<T>();
+       // return () -> new ArrayList<T>();
+
+        //可以只通过方法引用返回一个List
+        return ArrayList::new;
     }
 
     @Override
     public BiConsumer<List<T>, T> accumulator() {
-        return (list, item) -> list.add(item);
+
+        //return (list, item) -> list.add(item);
+
+        return List::add;
     }
 
     @Override
     public Function<List<T>, List<T>> finisher() {
-        return i -> i;
+        //return i -> i;
+        return Function.identity();
     }
 
     @Override
