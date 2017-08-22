@@ -9,6 +9,9 @@ public class Dish {
     private final int calories;
     private final Type type;
 
+   /* public Dish() {
+    }*/
+
     public Dish(String name, boolean vegetarian, int calories, Type type) {
         this.name = name;
         this.vegetarian = vegetarian;

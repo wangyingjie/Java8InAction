@@ -1,5 +1,7 @@
 package lambdasinaction.chap6;
 
+import lambdasinaction.chap1.FileDemo;
+
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
@@ -59,6 +61,12 @@ public class PartitionPrimeNumbers {
                 put(false, new ArrayList<Integer>());
             }};
         }
+
+        //@Override
+        public Supplier<FileDemo.Student> supplier2() {
+            return () -> new FileDemo.Student();
+        }
+
 
         @Override
         public BiConsumer<Map<Boolean, List<Integer>>, Integer> accumulator() {

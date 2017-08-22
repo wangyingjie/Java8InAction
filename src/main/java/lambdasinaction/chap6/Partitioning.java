@@ -23,11 +23,15 @@ public class Partitioning {
     }
 
     private static Object mostCaloricPartitionedByVegetarian() {
+
+
         return menu.stream().collect(
                 partitioningBy(Dish::isVegetarian,
                         collectingAndThen(
                                 maxBy(comparingInt(Dish::getCalories)),
                                 Optional::get)));
     }
+
+
 }
 

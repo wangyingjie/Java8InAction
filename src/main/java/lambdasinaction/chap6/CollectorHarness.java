@@ -13,6 +13,9 @@ public class CollectorHarness {
         long fastest = Long.MAX_VALUE;
         for (int i = 0; i < 10; i++) {
             long start = System.nanoTime();
+
+            int i1 = 1_000_000;
+
             primePartitioner.accept(1_000_000);
             long duration = (System.nanoTime() - start) / 1_000_000;
             if (duration < fastest) fastest = duration;
